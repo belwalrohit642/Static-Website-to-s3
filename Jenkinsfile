@@ -15,7 +15,7 @@ pipeline {
         stage('Test') {
             steps {
         sh 'htmlhint index.html' 
-        sh 'csslint style.css
+        sh 'csslint style.css'
 
             }
      
