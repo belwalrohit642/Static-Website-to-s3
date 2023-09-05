@@ -34,7 +34,7 @@ pipeline {
                     sh 'aws configure set default.region $AWS_DEFAULT_REGION'
 
                     // Sync website files with S3
-                    sh 'aws s3 cp /home/rohit/Documents/DocNexus/ s3://my-static-wesite-bucket-jenkins'
+                    sh 'aws s3 cp /home/rohit/Documents/DocNexus/* s3://my-static-wesite-bucket-jenkins'
                 }
             }
     }
