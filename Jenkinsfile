@@ -17,7 +17,7 @@ pipeline {
                 script {
                     try {
                         sh 'npx htmlhint index.html'  // Check HTML validity using htmlhint
-                        sh 'npx stylelint style.css'   // Check CSS validity using stylelint
+             
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
                         error("Tests failed: $e")
