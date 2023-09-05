@@ -6,6 +6,13 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Verify Node.js and npm') {
+    steps {
+        sh 'node -v'
+        sh 'npm -v'
+    }
+}
+
         stage('Build') {
             steps {
               sh 'npm install'
