@@ -9,14 +9,18 @@ pipeline {
         stage('Build') {
             steps {
                   echo "Build the application"
+                // For a simple static site, you might not need this stage
             }
 
         }
         stage('Test') {
             steps {
-        sh 'htmlhint index.html' 
-        sh 'csslint style.css'
-
+        sh 'npm install'
+        sh 'npm run test'
+        // If tests pass, create a build artifact
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+        sh 'npm run build' // Or any other command to generate build artifacts
+                
             }
      
         }
