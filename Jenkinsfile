@@ -1,29 +1,29 @@
 pipeline {
     agent any
+
     stages {
         stage('Checkout') {
             steps {
+                // Checkout the code from your Git repository
                 checkout scm
             }
         }
-        stage('Build') {
-            steps {
-                  echo "Build the application"
-                // For a simple static site, you might not need this stage
-            }
 
-        }
-        stage('Test') {
+        stage('Build and Test') {
             steps {
-        sh 'npm install'
-        sh 'npm run test'
-        // If tests pass, create a build artifact
-        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-        sh 'npm run build' // Or any other command to generate build artifacts
-                
+                // In a simple static website, there's no build step, so we'll skip it
+
+                // Run tests to check HTML and CSS validity
+                script {
+                    try {
+                        sh 'npx htmlhint index.html'  // Check HTML validity using htmlhint
+                        sh 'npx stylelint style.css'   // Check CSS validity using stylelint
+                    } catch (Exception e) {
+                        currentBuild.result = 'FAILURE'
+                        error("Tests failed: $e")
+                    }
+                }
             }
-     
         }
-        }
-}
+    }
 }
