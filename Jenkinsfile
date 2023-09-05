@@ -25,5 +25,17 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to AWS S3') {
+            steps {
+                script {
+                    // Configure AWS CLI
+                    sh 'aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID'
+                    sh 'aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY'
+                    sh 'aws configure set default.region $AWS_DEFAULT_REGION'
+
+                    // Sync website files with S3
+                    sh 'aws s3 sync ./ s3://$S3_BUCKET/'
+                }
+            }
     }
 }
