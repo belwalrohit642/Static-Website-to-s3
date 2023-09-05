@@ -8,14 +8,14 @@ pipeline {
         }
         stage('Build') {
             steps {
-                  echo "Build the applicatio"
+                  echo "Build the application"
             }
 
         }
         stage('Test') {
             steps {
         sh 'htmlhint index.html' 
-        sh 'csslint styles.css
+        sh 'csslint style.css
 
             }
      
