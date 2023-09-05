@@ -12,7 +12,7 @@ pipeline {
         stage('Build and Test') {
             steps {
                 // In a simple static website, there's no build step, so we'll skip it
-
+                   sh 'npm install htmlhint stylelint'
                 // Run tests to check HTML and CSS validity
                 script {
                     try {
