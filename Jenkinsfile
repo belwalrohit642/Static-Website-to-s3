@@ -34,7 +34,7 @@ pipeline {
                     sh 'aws configure set default.region $AWS_DEFAULT_REGION'
                     sh 'pwd'
                     // Sync website files with S3
-                    sh 'aws s3 cp ./* s3://my-static-wesite-bucket-jenkins'
+                    sh 'aws s3 cp . s3://my-static-wesite-bucket-jenkins'
                 }
             }
     }
