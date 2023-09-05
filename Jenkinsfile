@@ -6,26 +6,15 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Verify Node.js and npm') {
-    steps {
-        sh 'node -v'
-        sh 'npm -v'
-    }
+stage('build and test'){
+    steps{
+  // install required bundles
+  sh 'bundle install'
+  // build and run tests with coverage
+  sh 'bundle exec rake build spec'
+  // Archive the built artifacts
+  archive (includes: 'pkg/*.gem')
 }
-
-        stage('Build') {
-            steps {
-              sh 'npm install'
-              sh 'npm run build'
-            }
-        }
-        stage('Test') {
-            steps {
-               sh 'htmlhint index.html'
-               sh 'csslint styles.css'
-            }
-     
-        }
         }
 }
 
